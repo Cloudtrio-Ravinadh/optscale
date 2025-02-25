@@ -19,7 +19,8 @@ jobs:
 
       - name: Install Dependencies
         working-directory: ngui/ui
-        run: npm install --save-dev @vitest/coverage-v8
+        run: npm install --save-dev @vitest/coverage-v8 --force
+
 
       - name: Run Unit Tests and Generate Coverage Report
         working-directory: ngui/ui
