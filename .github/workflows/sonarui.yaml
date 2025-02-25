@@ -32,8 +32,8 @@ jobs:
         run: |
           npm install -g sonarqube-scanner
           sonar-scanner \
-            -Dsonar.projectKey=ngui \
-            -Dsonar.projectName=NGUI \
+            -Dsonar.projectKey=optscale \
+            -Dsonar.projectName=Optscale \
             -Dsonar.sources=ngui \
             -Dsonar.inclusions=ngui/**/*.html,ngui/**/*.css,ngui/**/*.js,ngui/**/*.jsx,ngui/**/*.json,ngui/**/*.xml \
             -Dsonar.exclusions=ngui/node_modules/**,ngui/build/**,ngui/dist/** \
