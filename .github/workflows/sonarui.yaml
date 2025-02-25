@@ -18,11 +18,11 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        working-directory: ngui
+        working-directory: ngui/ui
         run: npm install
 
       - name: Run Unit Tests and Generate Coverage Report
-        working-directory: ngui
+        working-directory: ngui/ui
         run: npm test -- --coverage
 
       - name: Run SonarQube Scan
