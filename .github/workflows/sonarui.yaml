@@ -1,0 +1,42 @@
+name: SonarQube Scan for NGUI
+
+on:
+  workflow_dispatch:  # Enables manual trigger
+
+jobs:
+  sonar_scan:
+    name: SonarQube Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        working-directory: ngui
+        run: npm install
+
+      - name: Run Unit Tests and Generate Coverage Report
+        working-directory: ngui
+        run: npm test -- --coverage
+
+      - name: Run SonarQube Scan
+        env:
+          SONAR_TOKEN: "sqp_da5bf8625271cf3bae75dd14acf6959811e7decb"
+          SONAR_HOST_URL: "http://20.198.56.90:9000/"
+        run: |
+          npm install -g sonarqube-scanner
+          sonar-scanner \
+            -Dsonar.projectKey=ngui \
+            -Dsonar.projectName=NGUI \
+            -Dsonar.sources=ngui \
+            -Dsonar.inclusions=ngui/**/*.html,ngui/**/*.css,ngui/**/*.js,ngui/**/*.jsx,ngui/**/*.json,ngui/**/*.xml \
+            -Dsonar.exclusions=ngui/node_modules/**,ngui/build/**,ngui/dist/** \
+            -Dsonar.javascript.lcov.reportPaths=ngui/coverage/lcov.info \
+            -Dsonar.host.url=$SONAR_HOST_URL \
+            -Dsonar.login=$SONAR_TOKEN
