@@ -24,7 +24,8 @@ jobs:
       - name: Run Unit Tests and Generate Coverage Report
         working-directory: ngui/ui
         run: |
-          npm test -- --coverage --watchAll=false --collectCoverageFrom='src/components/**/*.{js,jsx,ts,tsx}'
+          npm test -- --coverage --coverage.include='src/components/**/*.{js,jsx,ts,tsx}'
+
 
       - name: Upload Jest Coverage Report (for debugging)
         uses: actions/upload-artifact@v4
